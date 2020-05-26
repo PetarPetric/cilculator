@@ -13,15 +13,16 @@ output.style.color = 'white';
 const display = (text) => {
   curOp.textContent = text;
 }
-  
+
 let ope;
 let numb2;
 let numb1;
 let result;
 
+
 function deletion() { 
   curOp.textContent = curOp.textContent.split("").slice(0, -1).join("");
-  display(curOp.textContent);
+  display(curOp.textContent); 
 }
 
 function clear() {
@@ -45,20 +46,32 @@ numberBtn.forEach(button => {
   });
 });
 
-operationBtn.forEach(button => {
+  operationBtn.forEach(button => { 
   button.addEventListener('click', function(e) { 
+    if(curOp.textContent !== '' && prevOp.textContent !== '') {
+    equals();
     prevOp.textContent = curOp.textContent; 
     curOp.textContent = '';
-    numb1 = Number(prevOp.textContent, 10); //don't use parseInt, use Number()
-    ope = e.target.textContent; // here i pass operator that is clicked 
+    numb1 = Number(prevOp.textContent, 10);
+    ope = e.target.textContent;
+    } else {
+    prevOp.textContent = curOp.textContent; 
+    curOp.textContent = '';
+    numb1 = Number(prevOp.textContent, 10);
+    ope = e.target.textContent;
+    }
   });
 });
 
 
 equalsBtn.addEventListener('click', function(){
+  equals()
+  });
+
+function equals(){
    result = operate(numb1, ope, numb2) 
    display(result);
-   });
+   };
 
 function add(a,b) {
   return a+b ;
@@ -68,7 +81,7 @@ function subtract(a,b) {
   return a-b;
 }
 
-function mulltiply(a,b) {
+function multiply(a,b) {
   return a*b;
 }
 
